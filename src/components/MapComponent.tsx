@@ -19,6 +19,7 @@ interface MapComponentProps {
 }
 
 const MapComponent: React.FC<MapComponentProps> = ({ onPathFound }) => {
+  const apiBase = import.meta.env.VITE_API_BASE_URL || '';
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
   const markersRef = useRef<L.Marker[]>([]);
@@ -109,7 +110,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ onPathFound }) => {
         const endCoordinates = `${end.latitude},${end.longitude}`;
 
         const response = await fetch(
-          `${process.env.SERVER_URL}/api/find-path?start=${startCoordinates}&end=${endCoordinates}`
+          `${apiBase}/api/find-path?start=${startCoordinates}&end=${endCoordinates}`
         );
 
         if (!response.ok) {
