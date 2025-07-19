@@ -1,69 +1,89 @@
-# Welcome to your Lovable project
+# Dynamic A* Pathfinding with Neo4j (Frontend)
 
-## Project info
+This project is a modern frontend application for visualizing and interacting with dynamic A* pathfinding, powered by a Neo4j backend. It allows users to select waypoints on a map (focused on Gujarat, India) and find the most efficient routes between them using the A* algorithm.
 
-**URL**: https://lovable.dev/projects/da5f5446-921d-4cf5-a947-9470d4b7ee32
+## Features
 
-## How can I edit this code?
+- **Interactive Map**: Select multiple waypoints within Gujarat using an intuitive map interface (powered by Leaflet and OpenStreetMap).
+- **Dynamic Pathfinding**: Calculates the shortest path between selected points using the A* algorithm, with data fetched from a Neo4j-powered backend.
+- **Route Visualization**: Draws the computed path on the map and displays route details, including total cost/distance.
+- **Modern UI**: Built with React, shadcn-ui, and Tailwind CSS for a responsive, accessible, and visually appealing experience.
+- **Error Handling**: User-friendly notifications for invalid selections, errors, or unavailable routes.
 
-There are several ways of editing your application.
+## Tech Stack
 
-**Use Lovable**
+- [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/) (build tool)
+- [Leaflet](https://leafletjs.com/) (interactive maps)
+- [Tailwind CSS](https://tailwindcss.com/) (utility-first styling)
+- [shadcn/ui](https://ui.shadcn.com/) (UI components)
+- [Radix UI](https://www.radix-ui.com/) (accessible primitives)
+- [Neo4j](https://neo4j.com/) (graph database, backend)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/da5f5446-921d-4cf5-a947-9470d4b7ee32) and start prompting.
+## Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
+- [Node.js](https://nodejs.org/) (v18+ recommended)
+- [npm](https://www.npmjs.com/) or [bun](https://bun.sh/) (for dependency management)
+- A running backend server exposing a compatible API (see below)
 
-**Use your preferred IDE**
+### Installation
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+1. **Clone the repository:**
+   ```sh
+   git clone <YOUR_GIT_URL>
+   cd <YOUR_PROJECT_NAME>
+   ```
+2. **Install dependencies:**
+   ```sh
+   npm install
+   # or
+   bun install
+   ```
+3. **Start the development server:**
+   ```sh
+   npm run dev
+   # or
+   bun run dev
+   ```
+   The app will be available at [http://localhost:8080](http://localhost:8080) by default.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Usage
+- Click on the map to add waypoints (must be within Gujarat).
+- Click **Find Path** to compute the shortest route between the selected points.
+- View the route and details below the map.
+- Use **Reset** to clear waypoints and start over.
 
-Follow these steps:
+### Backend API
+This frontend expects a backend API (default: `http://localhost:5000/api/find-path`) that accepts `start` and `end` coordinates as query parameters and returns a JSON response with the path and total cost. Example request:
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+GET /api/find-path?start=22.2587,71.1924&end=23.0225,72.5714
 ```
 
-**Edit a file directly in GitHub**
+Example response:
+```json
+{
+  "path": [
+    { "name": "A", "latitude": 22.2587, "longitude": 71.1924 },
+    { "name": "B", "latitude": 23.0225, "longitude": 72.5714 }
+  ],
+  "totalCost": 123.45
+}
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+> **Note:** You must have the backend running and accessible for the frontend to function correctly.
 
-**Use GitHub Codespaces**
+## Scripts
+- `npm run dev` — Start development server
+- `npm run build` — Build for production
+- `npm run preview` — Preview production build
+- `npm run lint` — Lint code
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Customization
+- To change the map region, update the bounding box in `src/components/MapComponent.tsx`.
+- To point to a different backend, update the API URL in the same file.
 
-## What technologies are used for this project?
+## License
 
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/da5f5446-921d-4cf5-a947-9470d4b7ee32) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+This project is for educational and demonstration purposes. See [LICENSE](LICENSE) if present.
