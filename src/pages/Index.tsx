@@ -1,7 +1,7 @@
-
 import MapComponent from '@/components/MapComponent';
 import PathDetails from '@/components/PathDetails';
 import React, { useState } from 'react';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 type Location = {
   name: string;
@@ -25,6 +25,11 @@ const Index: React.FC = () => {
     <div className="min-h-screen bg-gray-900 text-gray-100">
       <div className="max-w-5xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <header className="mb-8 text-center">
+          <DotLottieReact
+            src="/Location_finding.lottie"
+            loop
+            autoplay
+          />
           <h1 className="text-3xl font-bold text-purple-400 mb-2">Dynamic A* Pathfinding with Neo4j</h1>
           <p className="text-gray-300 max-w-2xl mx-auto">
             Find the most efficient routes between destinations using advanced A* pathfinding algorithm
