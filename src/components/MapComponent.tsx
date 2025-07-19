@@ -109,7 +109,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ onPathFound }) => {
         const endCoordinates = `${end.latitude},${end.longitude}`;
 
         const response = await fetch(
-          `http://localhost:5000/api/find-path?start=${startCoordinates}&end=${endCoordinates}`
+          `/api/find-path?start=${startCoordinates}&end=${endCoordinates}`
         );
 
         if (!response.ok) {
