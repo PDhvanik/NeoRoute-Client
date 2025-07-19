@@ -9,14 +9,16 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
     proxy: {
-      "/api": `${process.env.SERVER_URL} || localhost:5000`,
-    }
+      "/api": {
+        target: process.env.SERVER_URL || "http://localhost:5000",
+        changeOrigin: true,
+        secure: true,
+      },
+    },
   },
-  plugins: [
-    react(),
-    mode === 'development' &&
-    componentTagger(),
-  ].filter(Boolean),
+  plugins: [react(), mode === "development" && componentTagger()].filter(
+    Boolean
+  ),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
